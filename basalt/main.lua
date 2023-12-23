@@ -1,9 +1,9 @@
-local basaltEvent = require("basaltEvent")()
-local baseObjects = require("loadObjects")
+local basaltEvent = require("basalt_event")()
+local baseObjects = require("load_objects")
 local moddedObjects
 local pluginSystem = require("plugin")
 local utils = require("utils")
-local log = require("basaltLogs")
+local log = require("basalt_logs")
 local uuid = utils.uuid
 local wrapText = utils.wrapText
 local count = utils.tableCount
@@ -37,7 +37,7 @@ end
 
 
 local function stop()
-    updaterActive = false    
+    updaterActive = false
     baseTerm.clear()
     baseTerm.setCursorPos(1, 1)
     for k,v in pairs(colors)do
@@ -143,7 +143,7 @@ local bInstance = {
     setFocusedObject = function(focused)
         focusedObject = focused
     end,
-    
+
     getMonitorFrame = function(name)
         return monFrames[name] or monGroups[name][1]
     end,
@@ -169,7 +169,7 @@ local bInstance = {
     stop = stop,
     debug = basalt.debug,
     log = basalt.log,
-    
+
     getObjects = getObjects,
 
     getObject = getObject,
@@ -196,7 +196,7 @@ local function defaultErrorHandler(errMsg)
         baseTerm.setCursorPos(1,yPos)
         baseTerm.write(v)
         yPos = yPos + 1
-    end 
+    end
     baseTerm.setCursorPos(1,yPos+1)
     updaterActive = false
 end
@@ -205,7 +205,7 @@ local function handleSchedules(event, p1, p2, p3, p4)
     if(#schedules>0)then
         local finished = {}
         for n=1,#schedules do
-            if(schedules[n]~=nil)then 
+            if(schedules[n]~=nil)then
                 if (coroutine.status(schedules[n]) == "suspended")then
                     local ok, result = coroutine.resume(schedules[n], event, p1, p2, p3, p4)
                     if not(ok)then
@@ -259,8 +259,8 @@ end
 
 local function mouseDragEvent(_, b, x, y)
     btn, dragX, dragY = b, x, y
-    if(dragThrottle<50)then 
-        dragHandlerTimer() 
+    if(dragThrottle<50)then
+        dragHandlerTimer()
     else
         if(dragTimer==nil)then
             dragTimer = os.startTimer(dragThrottle/1000)
@@ -368,22 +368,26 @@ local function InitializeBasalt()
                     local files = fs.list(v)
                     for _,object in pairs(files)do
                         if not(fs.isDir(v.."/"..object))then
-                            local name = object:gsub(".lua", "")
-                            if(name~="example.lua")and not(name:find(".disabled"))then
-                                if(baseObjects[name]==nil)then
-                                    baseObjects[name] = require(v.."."..object:gsub(".lua", ""))
+                            local moduleName = object:gsub(".lua", "")
+                            if(moduleName~="example.lua")and not(moduleName:find(".disabled"))then
+                                local objectName = utils.convertModuleName(moduleName)
+
+                                if(baseObjects[objectName]==nil)then
+                                    baseObjects[objectName] = require(v.."."..moduleName)
                                 else
-                                    error("Duplicate object name: "..name)
+                                    error("Duplicate object name: "..objectName)
                                 end
                             end
                         end
                     end
                 else
-                    local name = v:gsub(".lua", "")
-                    if(baseObjects[name]==nil)then
-                        baseObjects[name] = require(name)
+                    local moduleName = v:gsub(".lua", "")
+                    local objectName = utils.convertModuleName(moduleName)
+
+                    if(baseObjects[objectName]==nil)then
+                        baseObjects[objectName] = require(moduleName)
                     else
-                        error("Duplicate object name: "..name)
+                        error("Duplicate object name: "..objectName)
                     end
                 end
             end
@@ -444,7 +448,7 @@ basalt = {
     memory = function()
         return math.floor(collectgarbage("count")+0.5).."KB"
     end,
-    
+
     addObject = function(path)
         if(fs.exists(path))then
             table.insert(newObjects, path)
@@ -532,7 +536,7 @@ basalt = {
             end
         end
     end,
-    
+
     update = function(event, ...)
         if (event ~= nil) then
             local args = {...}
@@ -543,15 +547,15 @@ basalt = {
             end
         end
     end,
-    
+
     stop = stop,
     stopUpdate = stop,
-    
+
     isKeyDown = function(key)
         if(activeKey[key]==nil)then return false end
         return activeKey[key];
     end,
-    
+
     getFrame = function(name)
         for _, value in pairs(frames) do
             if (value:getName() == name) then
@@ -559,11 +563,11 @@ basalt = {
             end
         end
     end,
-    
+
     getActiveFrame = function()
         return activeFrame
     end,
-    
+
     setActiveFrame = function(frame)
         if (frame:getType() == "Container") then
             activeFrame = frame
@@ -575,7 +579,7 @@ basalt = {
     getMainFrame = function()
         return mainFrame
     end,
-    
+
     onEvent = function(...)
         for _,v in pairs(table.pack(...))do
             if(type(v)=="function")then
@@ -585,7 +589,7 @@ basalt = {
     end,
 
     schedule = schedule,
-    
+
     addFrame  = createFrame,
     createFrame = createFrame,
 

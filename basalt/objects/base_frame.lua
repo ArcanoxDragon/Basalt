@@ -1,4 +1,4 @@
-local drawSystem = require("basaltDraw")
+local drawSystem = require("basalt_draw")
 local utils = require("utils")
 
 local max,min,sub,rep = math.max,math.min,string.sub,string.rep
@@ -10,7 +10,7 @@ return function(name, basalt)
     local colorTheme = {}
 
     local updateRender = true
-    
+
     local termObject = basalt.getTerm()
     local basaltDraw = drawSystem(termObject)
 
@@ -29,7 +29,7 @@ return function(name, basalt)
     end)
     base:setSize(termObject.getSize())
 
-    local object = {   
+    local object = {
         getBase = function(self)
             return base
         end,
@@ -71,10 +71,10 @@ return function(name, basalt)
             end
             for k,v in pairs(colorTheme)do
                 if(type(v)=="number")then
-                    termObject.setPaletteColor(k ^ 2, v)
+                    termObject.setPaletteColor(2 ^ k, v)
                 else
                     local r,g,b = table.unpack(v)
-                    termObject.setPaletteColor(k ^ 2, r,g,b)
+                    termObject.setPaletteColor(2 ^ k, r,g,b)
                 end
             end
             basalt.setMainFrame(self)

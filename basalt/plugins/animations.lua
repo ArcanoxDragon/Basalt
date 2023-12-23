@@ -215,7 +215,7 @@ local lerp = {
     easeInOutBounce=easeInOutBounce,
 }
 
-local XMLParser = require("xmlParser")
+local XMLParser = require("xml_parser")
 
 local animationCount = 0
 local renderThrottleCACHE

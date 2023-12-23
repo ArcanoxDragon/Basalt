@@ -1,9 +1,9 @@
-local XMLParser = require("xmlParser")
+local XMLParser = require("xml_parser")
 
 return {
     VisualObject = function(base)
         local bgSymbol = false
-        local bgSymbolColor = colors.black  
+        local bgSymbolColor = colors.black
 
         local object = {
             setBackground = function(self, bg, symbol, symbolCol)

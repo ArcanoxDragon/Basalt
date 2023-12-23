@@ -1,4 +1,4 @@
-local basaltEvent = require("basaltEvent")
+local basaltEvent = require("basalt_event")
 local utils = require("utils")
 local split = utils.splitString
 local uuid = utils.uuid

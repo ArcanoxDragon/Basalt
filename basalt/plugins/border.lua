@@ -1,4 +1,4 @@
-local XMLParser = require("xmlParser")
+local XMLParser = require("xml_parser")
 
 return {
     VisualObject = function(base)
@@ -32,21 +32,21 @@ return {
                 base.draw(self)
                 self:addDraw("border", function()
                     local x, y = self:getPosition()
-                    local w,h = self:getSize()      
-                    local bgCol = self:getBackground()          
+                    local w,h = self:getSize()
+                    local bgCol = self:getBackground()
                     if(inline)then
                         if(borderColors["left"]~=false)then
                             self:addTextBox(1, 1, 1, h, "\149")
                             if(bgCol~=false)then self:addBackgroundBox(1, 1, 1, h, bgCol) end
                             self:addForegroundBox(1, 1, 1, h, borderColors["left"])
                         end
-                        
+
                         if(borderColors["top"]~=false)then
                             self:addTextBox(1, 1, w, 1, "\131")
                             if(bgCol~=false)then self:addBackgroundBox(1, 1, w, 1, bgCol) end
                             self:addForegroundBox(1, 1, w, 1, borderColors["top"])
                         end
-                        
+
                         if(borderColors["left"]~=false)and(borderColors["top"]~=false)then
                             self:addTextBox(1, 1, 1, 1, "\151")
                             if(bgCol~=false)then self:addBackgroundBox(1, 1, 1, 1, bgCol) end

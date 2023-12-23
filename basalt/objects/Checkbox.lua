@@ -1,5 +1,5 @@
 local utils = require("utils")
-local tHex = require("tHex")
+local tHex = require("thex")
 
 return function(name, basalt)
     -- Checkbox
@@ -22,7 +22,7 @@ return function(name, basalt)
             self:listenEvent("mouse_click", self)
             self:listenEvent("mouse_up", self)
         end,
-        
+
         setChecked = base.setValue,
 
         getChecked = base.getValue,

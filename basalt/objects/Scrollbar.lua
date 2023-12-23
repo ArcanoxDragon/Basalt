@@ -1,4 +1,4 @@
-local tHex = require("tHex")
+local tHex = require("thex")
 
 return function(name, basalt)
     local base = basalt.getObject("VisualObject")(name, basalt)

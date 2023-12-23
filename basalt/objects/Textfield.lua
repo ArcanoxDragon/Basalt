@@ -1,4 +1,4 @@
-local tHex = require("tHex")
+local tHex = require("thex")
 
 local rep,find,gmatch,sub,len = string.rep,string.find,string.gmatch,string.sub,string.len
 
@@ -74,7 +74,7 @@ return function(name, basalt)
         lines[sy] = startLine:sub(1, sx - 1) .. endLine:sub(ex + 1, endLine:len())
         bgLines[sy] = bgLines[sy]:sub(1, sx - 1) .. bgLines[ey]:sub(ex + 1, bgLines[ey]:len())
         fgLines[sy] = fgLines[sy]:sub(1, sx - 1) .. fgLines[ey]:sub(ex + 1, fgLines[ey]:len())
-    
+
         for i = ey, sy + 1, -1 do
             if i ~= sy then
                 table.remove(lines, i)
@@ -82,7 +82,7 @@ return function(name, basalt)
                 table.remove(fgLines, i)
             end
         end
-    
+
         self:setTextPosition(sx, sy)
         startSelX, endSelX, startSelY, endSelY = nil, nil, nil, nil
         return self
@@ -133,7 +133,7 @@ return function(name, basalt)
         end
         return positions
     end
-    
+
 
     local function updateColors(self, l)
         l = l or self:getTextYPosition()
@@ -742,17 +742,17 @@ return function(name, basalt)
                         fg = fgLines[n + hIndex - 1]
                         bg = bgLines[n + hIndex - 1]
                     end
-        
+
                     text = sub(text, wIndex, w + wIndex - 1)
                     bg = sub(bg, wIndex, w + wIndex - 1)
                     fg = sub(fg, wIndex, w + wIndex - 1)
-        
+
                     self:addText(1, n, text)
                     self:addBg(1, n, bg)
                     self:addFg(1, n, fg)
                     self:addBlit(1, n, text, fg, bg)
                 end
-        
+
                 if startSelX and endSelX and startSelY and endSelY then
                     local sx, ex, sy, ey = getSelectionCoordinates()
                     for n = sy, ey do
@@ -767,9 +767,9 @@ return function(name, basalt)
                             line = line - (sx - 1)
                             xOffset = sx - 1 - (wIndex - 1)
                         end
-                        
+
                         local visible_line_length = math.min(line, w - xOffset)
-                
+
                         self:addBg(1 + xOffset, n, rep(tHex[selectionBG], visible_line_length))
                         self:addFg(1 + xOffset, n, rep(tHex[selectionFG], visible_line_length))
                     end

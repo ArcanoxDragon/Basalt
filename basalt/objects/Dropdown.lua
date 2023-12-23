@@ -1,5 +1,5 @@
 local utils = require("utils")
-local tHex = require("tHex")
+local tHex = require("thex")
 
 return function(name, basalt)
     local base = basalt.getObject("List")(name, basalt)
@@ -91,7 +91,7 @@ return function(name, basalt)
                 self:updateDraw()
                 return true
             else
-                if(isOpened)then 
+                if(isOpened)then
                     self:updateDraw()
                     self:setOpened(false)
                 end

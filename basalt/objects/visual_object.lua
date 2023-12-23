@@ -1,5 +1,5 @@
 local utils = require("utils")
-local tHex = require("tHex")
+local tHex = require("thex")
 
 local sub, find, insert = string.sub, string.find, table.insert
 
@@ -256,10 +256,10 @@ return function(name, basalt)
         end,
 
         dragHandler = function(self, button, x, y)
-            if(isDragging)then 
+            if(isDragging)then
                 local objX, objY = self:getAbsolutePosition()
                 local val = self:sendEvent("mouse_drag", button, x - (objX-1), y - (objY-1), dragStartX-x, dragStartY-y, x, y)
-                dragStartX, dragStartY = x, y 
+                dragStartX, dragStartY = x, y
                 if(val~=nil)then return val end
                 if(parent~=nil)then
                     parent:setFocusedChild(self)
@@ -351,7 +351,7 @@ return function(name, basalt)
             pos = pos or #queue+1
             if(name~=nil)then
                 for k,v in pairs(queue)do
-                    if(v.name==name)then 
+                    if(v.name==name)then
                         table.remove(queue, k)
                         break
                     end
@@ -388,7 +388,7 @@ return function(name, basalt)
         getDrawId = function(self, name, typ)
             local queue = typ==1 and drawQueue or typ==2 and preDrawQueue or typ==3 and postDrawQueue or drawQueue
             for k,v in pairs(queue)do
-                if(v.name==name)then 
+                if(v.name==name)then
                     return k
                 end
             end

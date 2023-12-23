@@ -1,5 +1,5 @@
 local utils = require("utils")
-local tHex = require("tHex")
+local tHex = require("thex")
 
 return function(name, basalt)
     -- Input
@@ -247,9 +247,9 @@ return function(name, basalt)
                 local defaultBGCol = self:getDefaultBackground()
                 local defaultFGCol = self:getDefaultForeground()
                 local inputType = self:getInputType()
-                
+
                 local verticalAlign = utils.getTextVerticalAlign(h, "center")
-     
+
                 local val = tostring(self:getValue() or "")
                 local bCol = self:getBackground()
                 local fCol = self:getForeground()

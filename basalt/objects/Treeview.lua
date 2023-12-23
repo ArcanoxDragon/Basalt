@@ -1,5 +1,5 @@
 local utils = require("utils")
-local tHex = require("tHex")
+local tHex = require("thex")
 
 return function(name, basalt)
     local base = basalt.getObject("ChangeableObject")(name, basalt)
@@ -89,7 +89,7 @@ return function(name, basalt)
                     onSelect(node)
                 end
             end,
-            
+
             setExpandable = function(self, _expandable)
                 expandable = _expandable
                 base:updateDraw()
@@ -196,7 +196,7 @@ return function(name, basalt)
                     end
                     return false
                 end
-        
+
                 for _, item in ipairs(root:getChildren()) do
                     if checkNodeClick(item, 1) then
                         return true
@@ -212,11 +212,11 @@ return function(name, basalt)
                 if scrollable then
                     local _, h = self:getSize()
                     yOffset = yOffset + dir
-        
+
                     if yOffset < 0 then
                         yOffset = 0
                     end
-        
+
                     if dir >= 1 then
                         local visibleLines = 0
                         local function countVisibleLines(node, level)
@@ -227,11 +227,11 @@ return function(name, basalt)
                                 end
                             end
                         end
-        
+
                         for _, item in ipairs(root:getChildren()) do
                             countVisibleLines(item, 1)
                         end
-        
+
                         if visibleLines > h then
                             if yOffset > visibleLines - h then
                                 yOffset = visibleLines - h
@@ -258,24 +258,24 @@ return function(name, basalt)
                 local lastClickedNode = self:getValue()
                 local function drawNode(node, level)
                     local w, h = self:getSize()
-                
+
                     if currentLine >= 1 and currentLine <= h then
                         local bg = (node == lastClickedNode) and itemSelectedBG or self:getBackground()
                         local fg = (node == lastClickedNode) and itemSelectedFG or self:getForeground()
-                
+
                         local text = node.getText()
                         self:addBlit(1 + level + xOffset, currentLine, text, tHex[fg]:rep(#text), tHex[bg]:rep(#text))
                     end
-                
+
                     currentLine = currentLine + 1
-                               
+
                     if node:isExpanded() then
                         for _, child in ipairs(node:getChildren()) do
                             drawNode(child, level + 1)
                         end
                     end
                 end
-        
+
                 for _, item in ipairs(root:getChildren()) do
                     drawNode(item, 1)
                 end

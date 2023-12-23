@@ -1,6 +1,6 @@
 local max,min,sub,rep = math.max,math.min,string.sub,string.rep
 
-local tHex = require("tHex")
+local tHex = require("thex")
 
 return function(name, basalt)
     local base = basalt.getObject("Frame")(name, basalt)
@@ -195,7 +195,7 @@ return function(name, basalt)
                         local bgSymbol, bgColor, bgFgColor = self:getScrollbarBack()
                         local fgSymbol, fgColor, fgFgColor = self:getScrollbarFront()
                         local arrowBg, arrowFg = self:getScrollbarArrowColor()
-                        
+
                         bgColor = tHex[bgColor]
                         fgColor = tHex[fgColor]
                         bgFgColor = tHex[bgFgColor]
@@ -224,7 +224,7 @@ return function(name, basalt)
                         local bgSymbol, bgColor, bgFgColor = self:getScrollbarBack()
                         local fgSymbol, fgColor, fgFgColor = self:getScrollbarFront()
                         local arrowBg, arrowFg = self:getScrollbarArrowColor()
-                        
+
                         bgColor = tHex[bgColor]
                         fgColor = tHex[fgColor]
                         bgFgColor = tHex[bgFgColor]

@@ -1,4 +1,4 @@
-local tHex = require("tHex")
+local tHex = require("thex")
 local sub,find,reverse,rep,insert,len = string.sub,string.find,string.reverse,string.rep,table.insert,string.len
 
 local function splitString(str, delimiter)
@@ -218,9 +218,16 @@ end
 
 
 
-    
+
 
 return {
+convertModuleName = function(moduleName)
+    -- Convert from snake_case to camelCase and then to PascalCase
+    local objectName = moduleName:gsub("_(%l)", function(s) return s:upper() end)
+    objectName = objectName:gsub("^(%l)", function(s) return s:upper() end)
+    return objectName
+end,
+
 getTextHorizontalAlign = function(text, width, textAlign, replaceChar)
     text = sub(text, 1, width)
     local offset = width - len(text)

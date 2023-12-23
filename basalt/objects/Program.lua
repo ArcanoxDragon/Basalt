@@ -1,4 +1,4 @@
-local tHex = require("tHex")
+local tHex = require("thex")
 local process = require("process")
 
 local sub = string.sub
@@ -372,7 +372,7 @@ return function(name, basalt)
                 error("Basalt Program - "..result)
             end
         end
-        
+
         if(curProcess:getStatus()=="dead")then
             self:sendEvent("program_done")
         end
@@ -480,7 +480,7 @@ return function(name, basalt)
             return self:execute(path, ...)
         end,
 
-        stop = function(self)            
+        stop = function(self)
             local parent = self:getParent()
             if (curProcess ~= nil) then
                 if not (curProcess:isDead()) then

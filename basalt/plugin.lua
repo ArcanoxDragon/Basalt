@@ -1,3 +1,4 @@
+local utils = require("utils")
 local args = {...}
 local plugins = {}
 local pluginNames = {}
@@ -6,7 +7,8 @@ local dir = fs.getDir(args[2] or "Basalt")
 local pluginDir = fs.combine(dir, "plugins")
 if(packaged)then
     for k,v in pairs(getProject("plugins"))do
-        table.insert(pluginNames, k)
+        local pluginName = utils.convertModuleName(k)
+        table.insert(pluginNames, pluginName)
         local newPlugin = v()
         if(type(newPlugin)=="table")then
             for a,b in pairs(newPlugin)do
@@ -22,10 +24,12 @@ else
         for _,v in pairs(fs.list(pluginDir))do
             local newPlugin
             if(fs.isDir(fs.combine(pluginDir, v)))then
-                table.insert(pluginNames, fs.combine(pluginDir, v))
+                local pluginName = utils.convertModuleName(v)
+                table.insert(pluginNames, fs.combine(pluginDir, pluginName))
                 newPlugin = require(v.."/init")
             else
-                table.insert(pluginNames, v)
+                local pluginName = utils.convertModuleName(v)
+                table.insert(pluginNames, pluginName)
                 newPlugin = require(v:gsub(".lua", ""))
             end
             if(type(newPlugin)=="table")then

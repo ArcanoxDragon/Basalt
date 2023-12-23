@@ -1,5 +1,5 @@
-local Reactive = require("reactivePrimitives")
-local XMLParser = require("xmlParser")
+local Reactive = require("reactive_primitives")
+local XMLParser = require("xml_parser")
 
 local Layout = {
     fromXML = function(text)
@@ -62,7 +62,7 @@ return {
                     end
                     return basalt.createObjectsFromLayout(layout, props)
                 end
-            
+
                 local objectName = node.tag:gsub("^%l", string.upper)
                 local object = basalt:createObject(objectName, node.attributes["id"])
                 for attribute, expression in pairs(node.attributes) do

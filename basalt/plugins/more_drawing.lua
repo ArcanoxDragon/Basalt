@@ -1,4 +1,4 @@
-local tHex = require("tHex")
+local tHex = require("thex")
 
 local function line(x1, y1, x2, y2)
     local points = {}
@@ -81,7 +81,7 @@ local function circle(xPos, yPos, radius, filled)
 end
 
 local function ellipse(xPos, yPos, radiusX, radiusY, filled)
-    local points = {}            
+    local points = {}
     local function plotPoints(xc, yc, x, y)
         table.insert(points, {x = xc + x, y = yc + y})
         table.insert(points, {x = xc - x, y = yc + y})
@@ -130,7 +130,7 @@ end
 
 local function polygon(points, filled)
     local newPoints = {}
-            
+
     local pointsCopy = {}
     for i, point in ipairs(points) do
         table.insert(pointsCopy, {x = point.x, y = point.y})
@@ -162,7 +162,7 @@ local function polygon(points, filled)
                 local numCrossings = 0
                 for i = 1, #pointsCopy - 1 do
                     if ((pointsCopy[i].y > y) ~= (pointsCopy[i+1].y > y)) and
-                        (x < (pointsCopy[i+1].x - pointsCopy[i].x) * (y - pointsCopy[i].y) / 
+                        (x < (pointsCopy[i+1].x - pointsCopy[i].x) * (y - pointsCopy[i].y) /
                             (pointsCopy[i+1].y - pointsCopy[i].y) + pointsCopy[i].x) then
                         numCrossings = numCrossings + 1
                     end
@@ -179,7 +179,7 @@ end
 
 local function rectangle(xPos, yPos, width, height, filled)
     local points = {}
-            
+
     if filled then
         for y = yPos, yPos + height - 1 do
             for x = xPos, xPos + width - 1 do
@@ -286,7 +286,7 @@ return {
             self:addBackgroundBox(x, y, 1, h, bgCol)
             self:addForegroundBox(x, y, 1, h, borderColors["left"])
 
-        
+
             self:addTextBox(x, y, x+width-1, 1, "\131")
             self:addBackgroundBox(x, y, x+width-1, 1, bgCol)
             self:addForegroundBox(x, y, x+width-1, 1, borderColors["top"])
@@ -294,11 +294,11 @@ return {
             self:addTextBox(x, y, 1, 1, "\151")
             self:addBackgroundBox(x, y, 1, 1, bgCol)
             self:addForegroundBox(x, y, 1, 1, borderColors["left"])
-        
+
             self:addTextBox(x+width-1, 1, 1, h, "\149")
             self:addForegroundBox(x+width-1, 1, 1, h, bgCol)
             self:addBackgroundBox(x+width-1, 1, 1, h, borderColors["right"])
-        
+
             self:addTextBox(1, h, x+width-1, 1, "\143")
             self:addForegroundBox(1, h, x+width-1, 1, bgCol)
             self:addBackgroundBox(1, h, x+width-1, 1, borderColors["bottom"])

@@ -1,4 +1,4 @@
-local tHex = require("tHex")
+local tHex = require("thex")
 local sub,rep = string.sub,string.rep
 
 return function(drawTerm)
@@ -11,7 +11,7 @@ return function(drawTerm)
 
     local emptySpaceLine
     local emptyColorLines = {}
-    
+
     local function createEmptyLines()
         emptySpaceLine = rep(" ", width)
         for n = 0, 15 do
@@ -60,7 +60,7 @@ return function(drawTerm)
             end
         end
     end
-    
+
     local function setText(x, y, t)
         if y >= 1 and y <= height then
             if x + #t > 0 and x <= width then
@@ -192,20 +192,20 @@ return function(drawTerm)
             for n = 1, height do
                 terminal.setCursorPos(1, n)
                 terminal.blit(cacheT[n], cacheFG[n], cacheBG[n])
-                if(mirrorTerm~=nil)then 
-                    mirrorTerm.setCursorPos(1, n) 
+                if(mirrorTerm~=nil)then
+                    mirrorTerm.setCursorPos(1, n)
                     mirrorTerm.blit(cacheT[n], cacheFG[n], cacheBG[n])
                 end
             end
             terminal.setBackgroundColor(colors.black)
             terminal.setCursorBlink(isBlinking)
             terminal.setCursorPos(xC, yC)
-            if(mirrorTerm~=nil)then 
+            if(mirrorTerm~=nil)then
                 mirrorTerm.setBackgroundColor(colors.black)
                 mirrorTerm.setCursorBlink(isBlinking)
                 mirrorTerm.setCursorPos(xC, yC)
             end
-            
+
         end,
 
         setTerm = function(newTerm)
