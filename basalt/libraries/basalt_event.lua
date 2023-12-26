@@ -12,13 +12,16 @@ return function()
         end,
 
         removeEvent = function(self, _event, index)
-            events[_event][index[_event]] = nil
+            local ev = events[_event]
+            if ev and index and index[_event] then
+                ev[index[_event]] = nil
+            end
         end,
 
         hasEvent = function(self, _event)
             return events[_event]~=nil
         end,
-        
+
         getEventCount = function(self, _event)
             return _event~=nil and events[_event]~=nil and tableCount(events[_event]) or tableCount(events)
         end,
