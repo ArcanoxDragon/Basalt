@@ -342,6 +342,34 @@ return function(name, basalt)
             self:updateDraw()
         end,
 
+        removeChild = function(self, child)
+            base.removeChild(self, child)
+            local removed = false
+            if type(child) == "string" then
+                child = self:getChild(child)
+            end
+            if child ~= nil then
+                for i, v in ipairs(children) do
+                    if v.element == child then
+                        table.remove(children, i)
+                        removed = true
+                        break
+                    end
+                end
+            end
+            if removed then
+                updateLayout = true
+                self:updateDraw()
+            end
+        end,
+
+        removeChildren = function(self)
+            base.removeChildren(self)
+            children = {}
+            updateLayout = true
+            self:updateDraw()
+        end,
+
         addBreak = function(self)
             table.insert(children, lineBreakFakeObject)
             updateLayout = true
