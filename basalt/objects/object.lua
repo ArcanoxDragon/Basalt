@@ -18,7 +18,7 @@ return function(name, basalt)
     local properties = {}
     local propertyConfig = {}
 
-    local function defaultRule(typ)
+    local function defaultRule(typ, propName)
         return function(self, value)
          local isValid = false
             if(type(typ)=="string")then
@@ -72,7 +72,7 @@ return function(name, basalt)
                     typ = table.concat(typ, ", ")
                     t = value
                 end
-                error(self:getType()..": Invalid type for property "..name.."! Expected "..typ..", got "..t)
+                error(self:getType()..": Invalid type for property "..propName.."! Expected "..typ..", got "..t)
             end
             return value
         end
@@ -172,7 +172,7 @@ return function(name, basalt)
                                 value = modifiedVal
                             end
                         end
-                        self:setProperty(name, value, alteredRule~=nil and alteredRule(typ) or defaultRule(typ))
+                        self:setProperty(name, value, alteredRule~=nil and alteredRule(typ) or defaultRule(typ, name))
                     end
                     return self
                 end
