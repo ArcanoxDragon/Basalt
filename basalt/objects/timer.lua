@@ -46,7 +46,7 @@ return function(name, basalt)
                 os.cancelTimer(timerObj)
             end
             timerIsActive = false
-            self:removeEvent("other_event")
+            self:removeEvent("other_event", self)
             return self
         end,
 
