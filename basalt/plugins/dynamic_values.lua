@@ -135,7 +135,7 @@ local function dynamicValue(object, name, dynamicString, basalt)
     return {
         get = function(self)
             if(needsUpdate)then
-                cachedValue = calculate() + 0.5
+                cachedValue = calculate()
                 if(type(cachedValue)=="number")then
                     cachedValue = math.floor(cachedValue + 0.5)
                 end
