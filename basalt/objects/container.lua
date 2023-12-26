@@ -52,7 +52,7 @@ return function(name, basalt)
         if (maybeChild ~= nil) then
             return maybeChild
         end
-        for _, child in ipairs(children) do            
+        for _, child in ipairs(children) do
             if (child:getType() == "Container") then
                 local maybeDeepChild = child:getDeepChild(name)
                 if (maybeDeepChild ~= nil) then
@@ -88,7 +88,7 @@ return function(name, basalt)
 
     local function removeChild(self, element)
         if (type(element)=="string") then
-            element = getChild(element:getName())
+            element = getChild(element)
         end
         if (element==nil) then
             return
@@ -172,7 +172,7 @@ return function(name, basalt)
         if (getEvent(self, event, element:getName()) ~= nil) then
             return
         end
-        local zIndex = element:getZ() 
+        local zIndex = element:getZ()
         evId = evId + 1
         if(events[event]==nil)then events[event] = {} end
         table.insert(events[event], {element = element, zIndex = zIndex, evId = evId})
@@ -322,7 +322,7 @@ return function(name, basalt)
             end
             return results
         end,
-        
+
         getChild = getChild,
         getChildren = getChildren,
         getDeepChildren = getDeepChild,
@@ -398,7 +398,7 @@ return function(name, basalt)
                                         xO, yO = 0, 0
                                     end
                                 end
-                                if (obj.element[v[1]](obj.element, btn, x+xO, y+yO, ...)) then 
+                                if (obj.element[v[1]](obj.element, btn, x+xO, y+yO, ...)) then
                                     return true
                                 end
                             end
