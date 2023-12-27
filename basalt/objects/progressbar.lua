@@ -51,8 +51,8 @@ return function(name, basalt)
                     self:addForegroundBox(1, 1, w, h / 100 * p.Progress, activeBarSymbolCol)
                     self:addTextBox(1, 1, w, h / 100 * p.Progress, activeBarSymbol)
                 elseif (p.Direction == 3) then
-                    self:addBackgroundBox(1, 1 + math.ceil(h - h / 100 * p.Progress), w, h / 100 * p.Progress, activeBarColor)
-                    self:addForegroundBox(1, 1 + math.ceil(h - h / 100 * p.Progress), w, h / 100 * p.Progress, activeBarSymbolCol)
+                    self:addBackgroundBox(1, 1 + math.ceil(h - h / 100 * p.Progress), w, math.floor(h / 100 * p.Progress), activeBarColor)
+                    self:addForegroundBox(1, 1 + math.ceil(h - h / 100 * p.Progress), w, math.floor(h / 100 * p.Progress), activeBarSymbolCol)
                     self:addTextBox(1, 1 + math.ceil(h - h / 100 * p.Progress), w, h / 100 * p.Progress, activeBarSymbol)
                 elseif (p.Direction == 2) then
                     self:addBackgroundBox(1 + math.ceil(w - w / 100 * p.Progress), 1, w / 100 * p.Progress, h, activeBarColor)
